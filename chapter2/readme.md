@@ -13,6 +13,8 @@ https://cloud.google.com/docs/terraform/get-started-with-terraform?hl=ja
 
 で作成したプロジェクト設定に切り替わっているか確認
 
+> gcloud config set project <project-id>
+
 ### Compute Engine APIの有効化
 
 > gcloud services enable compute.googleapis.com
