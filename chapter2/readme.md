@@ -38,3 +38,21 @@ terraform initを実行して必要なプラグインを追加する。
 
 Dry-Run(事前検証)する。
 > terraform plan
+
+#### variables.tfから変数名を使う
+
+`var.変数名`で他ファイルから値を参照できる。
+```main.tf
+resource "google_compute_instance" "default" {
+  name         = var.instance_name
+```
+
+```variables.tf
+variable "instance_name" {
+  type = string
+  default = "kotosaki-instance"
+}
+```
+
+defaultがない場合はterraform plan実行時に外部入力を求められる。
+
