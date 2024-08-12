@@ -5,6 +5,10 @@ terraform {
       version = "5.40.0"
     }
   }
+
+  backend "gcs" {
+    bucket = "sumiri-bucket"
+  }
 }
 
 provider "google" {

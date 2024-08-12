@@ -32,3 +32,33 @@ resource "google_storage_bucket" "terraform-state-store"{
 > terraform plan
 
 > terraform apply
+
+### tfstateの設定
+
+terraform.backedにbucket名を追加する。
+
+```main.tf
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "5.40.0"
+    }
+  }
+
+  backend "gcs" {
+    bucket = var.bucket_name
+  }
+}
+
+```
+
+**terraform{}**ではvarを使って値渡しすることができない。
+```
+│ Error: Variables not allowed
+│
+│   on main.tf line 10, in terraform:
+│   10:     bucket = var.bucket_name
+│
+│ Variables may not be used here.
+```
