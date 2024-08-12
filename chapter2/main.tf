@@ -10,7 +10,7 @@ terraform {
 provider "google" {
 #   credentials = file("ダウンロードしたJSONファイルへのフルパス")
 
-  project = ""
+  project = var.project_id
   region  = "asia-northeast1"
   zone    = "asia-northeast1-a"
 }
@@ -29,9 +29,9 @@ resource "google_compute_subnetwork" "default" {
 
 # Create a single Compute Engine instance
 resource "google_compute_instance" "default" {
-  name         = "flask-vm"
-  machine_type = "n2-standard-2"
-  tags         = ["ssh"]
+  name         = var.instance_name
+  machine_type = var.machine_type
+  tags         = ["ssh", "test"]
 
   boot_disk {
     initialize_params {
