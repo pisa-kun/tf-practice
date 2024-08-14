@@ -44,3 +44,30 @@ Terraform 設定ファイルがあるディレクトリ（ environments/dev/setu
 > terraform plan -var-file="secret.tfvars"
 
 > terraform apply -var-file="secret.tfvars"
+
+### tfstateファイルの管理
+
+```
+.
+├── README.md
+├── commons　# 🆕 環境で共通のリソースを置く想定
+│   └── backend_setup # 🆕 Cloud Storageを構成する
+│       ├── main.tf
+│       ├── provider.tf
+│       └── variable.tf
+├── environments # 各環境を想定（開発、ステージング、本番など）
+└── modules # 再利用可能なTerraformコード（モジュール）を格納するディレクトリ
+```
+
+この状態でterraform applyしてbucketを作成する。
+
+そのあとに`backend.tf`を作成してterraform init → terraform applyする。
+
+```
+terraform {
+  backend "gcs" {
+    bucket = "sample-terraform-state-bucket" // your gcs bucket name
+    prefix = "commons/backend_setup"         // your gcs prefix
+  }
+}
+```
