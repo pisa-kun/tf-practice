@@ -62,3 +62,23 @@ terraform {
 │
 │ Variables may not be used here.
 ```
+
+### workspace
+
+```
+  backend "gcs" {
+    bucket = "sumiri-bucket"
+    #workspace
+    key = "workspace/terraform.tfstate"
+  }
+```
+
+`terraform apply`したあとに`terraform workspace show`する。
+
+新しいワークスペースを作成する。
+> terraform workspace new development
+
+> terraform apply
+
+`terraform workspace select default`で環境切り替え
+
