@@ -20,11 +20,14 @@ provider "aws" {
 ## デフォルトで今はパブリックアクセスブロックはすべて無効化されている
 resource "aws_s3_bucket" "raw-sample" {
   bucket = "sample-bucket-raw-access-sumisumi" // s3バケット名をユニークにするために自分の名前など入れる
+  force_destroy = true
 }
 
 ## 明示的に無効化する場合
 resource "aws_s3_bucket" "block-sample" {
   bucket = "sample-bucket-block-access-sumisumi" // s3バケット名をユニークにするために自分の名前など入れる
+  // bucketの中にオブジェクトが入っていても強制的にバケットごと削除
+  force_destroy = true
 }
 
 # バケットポリシーの内容を定義
